@@ -13,7 +13,7 @@
               <div class="col-md-12 grid-margin">
                 <div class="row">
                   <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Mabuhay, Brgy San Manuel!</h3>
+                    <h3 class="font-weight-bold">Mabuhay mga Kabarangay!</h3>
                     <h6 class="font-weight-normal mb-0">Every action taken towards addressing malnutrition brings hope for a healthier future.</h6>
                   </div>
                   <div class="col-12 col-xl-4">
