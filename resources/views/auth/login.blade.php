@@ -16,12 +16,12 @@
                 <div class="input-icon">
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" required>
-                    @error('email')
+                </div>
+                @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
-                </div>
+                @enderror
             </div>
             <div class="form-group">
                 <div class="input-icon">

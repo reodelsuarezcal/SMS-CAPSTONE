@@ -23,5 +23,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" />
+
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    
   </head>
 
