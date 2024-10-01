@@ -13,4 +13,8 @@ class PatientController extends Controller
     public function addIndex(){
         return view('layouts.add-patient');
     }
+
+    public function viewProfile(){
+        return view('layouts.view-profile');
+    }
 }
