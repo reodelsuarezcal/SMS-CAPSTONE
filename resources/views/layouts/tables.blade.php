@@ -33,8 +33,7 @@
                             <td>53275531</td>
                             <td>12 May 2017</td>
                             <td>
-                              <a class="btn btn-warning btn-sm"><i class="mdi mdi-pencil-box-outline"></i>Edit</a>
-                              <a class="btn btn-danger btn-sm"><i class="mdi mdi-delete-sweep"></i> Delete</a>
+                              <a href="{{ route('view.profile') }}" class="btn btn-success btn-sm text-white"><i class="mdi mdi-eye text-white"></i> View</a>
                            </td>
                           </tr>
                         </tbody>
