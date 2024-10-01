@@ -52,14 +52,36 @@
         }
 
         .file-input {
-            display: none; /* Hide the file input */
+            display: none; 
         }
 
         .custom-file-label {
-            cursor: pointer; /* Change cursor on hover */
+            cursor: pointer; 
         }
 
     </style>
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}'
+                });
+            @endif
+        });
+    </script>
+       <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed',
+                    text: '{{ session('error') }}'
+                });
+            @endif
+        });
+    </script>
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
@@ -76,51 +98,70 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Add Patient</h4>
-                    <form class="form-sample">
+                    <form class="form-sample" method="POST" action="{{ route('store.patient') }}" enctype="multipart/form-data">
+                      @csrf
                       <p class="card-description"> Personal information </p>
                       <div class="row">
-                        <div class="col-md-4">
+                      <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" placeholder="Last Name"/>
+                              <input type="text" class="form-control" name="patient_id" placeholder="Patient ID"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" placeholder="First Name" />
+                              <input type="text" class="form-control" name="lastname" placeholder="Last Name"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" placeholder="Middle Name"/>
+                              <input type="text" class="form-control" name="firstname" placeholder="First Name" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="middlename" placeholder="Middle Name"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="suffix" placeholder="Suffix"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="date" class="form-control" name="birthday" placeholder="Birthday" />
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                       <div class="col-md-4">
-                          <div class="form-group row">
+                        <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" placeholder="Suffix"/>
+                                <select class="form-select text-dark" name="gender" aria-label="Select Gender">
+                                    <option disabled selected>Select Gender</option>
+                                    <option class="text-dark" value="Male">Male</option>
+                                    <option class="text-dark" value="Female">Female</option>
+                                </select>
                             </div>
-                          </div>
                         </div>
+                    </div> 
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="date" class="form-control" placeholder="Birthday" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group row">
-                            <div class="col-sm-12">
-                              <select class="js-example-basic-single w-100">
-                                <option disabled selected >Select Parent</option>
+                              <select class="js-example-basic-single w-100" name="parent">
+                                <option disabled selected >Select Parent/Guardian</option>
                                 <option value="AL">Alabama</option>
                                 <option value="WY">Wyoming</option>
                                 <option value="AM">America</option>
@@ -130,45 +171,33 @@
                             </div>
                           </div>
                         </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="number" class="form-control" name="height" placeholder="Height(cm)"/>
+                            </div>
+                        </div>
+                    </div>
                       </div>
-                      <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <select class="form-select text-dark" aria-label="Select Gender">
-                                    <option disabled selected>Select Gender</option>
-                                    <option class="text-dark">Male</option>
-                                    <option class="text-dark">Female</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" placeholder="Height(cm)"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" placeholder="Weight(kg)"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                     <div class="row">
-                      <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="number" class="form-control" name="weight" placeholder="Weight(kg)"/>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-md-6">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="file" class="form-control" placeholder="profile Picture"/>
+                              <input type="file" class="form-control" name="profile_pic" placeholder="profile Picture"/>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                     </div>
                     </form>
                   </div>
@@ -222,6 +251,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
   </body>
 </html>

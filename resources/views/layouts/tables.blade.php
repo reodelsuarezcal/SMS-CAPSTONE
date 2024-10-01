@@ -21,17 +21,23 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Profile</th>
-                            <th>VatNo.</th>
-                            <th>Created</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Birthday</th>
+                            <th>Gender</th>
+                            <th>Parent/Guardian</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>Jacob</td>
-                            <td>53275531</td>
-                            <td>12 May 2017</td>
+                            <td>Llado</td>
+                            <td>Maurene</td>
+                            <td>Cayao</td>
+                            <td>December 17 2001</td>
+                            <td>Male</td>
+                            <td>Sean Harvey Orga</td>
                             <td>
                               <a href="{{ route('view.profile') }}" class="btn btn-success btn-sm text-white"><i class="mdi mdi-eye text-white"></i> View</a>
                            </td>

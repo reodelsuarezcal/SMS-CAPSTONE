@@ -27,4 +27,9 @@ Route::get('/add-patient', [App\Http\Controllers\PatientController::class, 'addI
 Route::get('/view-profile', [App\Http\Controllers\PatientController::class, 'viewProfile'])->name('view.profile');
 Route::get('/table', [App\Http\Controllers\PatientController::class, 'index'])->name('table');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+//CRUD OPERATIONS
+Route::post('/upload-file', [App\Http\Controllers\PatientController::class, 'store'])->name('store.patient');
+
+
 });
