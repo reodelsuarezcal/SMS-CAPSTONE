@@ -98,49 +98,50 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Add Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a></h4>
-                    <form class="form-sample" method="POST" action="{{ route('store.patient') }}" enctype="multipart/form-data">
+                    <form class="form-sample" method="POST" action="{{ route('patient.update', ['id' => $patient->id]) }}" enctype="multipart/form-data">
                       @csrf
+                      @method('PUT')
                       <p class="card-description"> Personal information </p>
                       <div class="row">
                       <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" name="patient_id" placeholder="Patient ID"/>
+                              <input type="text" class="form-control" value="{{$patient->patient_id}}" name="patient_id" placeholder="Patient ID"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" name="lastname" placeholder="Last Name"/>
+                              <input type="text" class="form-control" value="{{$patient->lastname}}" name="lastname" placeholder="Last Name"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" name="firstname" placeholder="First Name" />
+                              <input type="text" class="form-control" value="{{$patient->firstname}}" name="firstname" placeholder="First Name" />
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" name="middlename" placeholder="Middle Name"/>
+                              <input type="text" class="form-control" value="{{$patient->middlename}}" name="middlename" placeholder="Middle Name"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" name="suffix" placeholder="Suffix"/>
+                              <input type="text" class="form-control" value="{{$patient->suffix}}" name="suffix" placeholder="Suffix"/>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="date" class="form-control" name="birthday" placeholder="Birthday" />
+                              <input type="date" class="form-control" value="{{$patient->birthday}}" name="birthday" placeholder="Birthday" />
                             </div>
                           </div>
                         </div>
@@ -149,49 +150,54 @@
                       <div class="col-md-4">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <select class="form-select text-dark" name="gender" aria-label="Select Gender">
-                                    <option disabled selected>Select Gender</option>
+                                <select class="form-select text-dark"  name="gender" aria-label="Select Gender">
+                                    <option selected>{{$patient->gender}}</option>
                                     <option class="text-dark" value="Male">Male</option>
                                     <option class="text-dark" value="Female">Female</option>
                                 </select>
                             </div>
                         </div>
                     </div> 
-                        <div class="col-md-4">
-                          <div class="form-group row">
-                            <div class="col-sm-12">
-                            <select class="js-example-basic-single w-100" name="parent_id">
-                                  <option disabled selected>Select Parent/Guardian</option>
-                                  @foreach($parents as $parent)
-                                          <option value="{{ $parent->id }}">
-                                              {{ $parent->lastname }}, {{ $parent->firstname }} {{ $parent->middlename }}
-                                          </option>
-                                  @endforeach
-                              </select>
-                            </div>
-                          </div>
-                        </div>
                     <div class="col-md-4">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" name="height" placeholder="Height(cm)"/>
+                                <select class="js-example-basic-single w-100" name="parent_id">
+                                    @if($patient->parents)
+                                        <option value="{{ $patient->parents->id }}" selected>
+                                            {{ $patient->parents->lastname }}, {{ $patient->parents->firstname }} {{ $patient->parents->middlename }}
+                                        </option>
+                                    @else
+                                        <option disabled selected>Select Parent</option>
+                                    @endif
+                                    @foreach($parents as $parent)
+                                        <option value="{{ $parent->id }}">
+                                            {{ $parent->lastname }}, {{ $parent->firstname }} {{ $parent->middlename }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
-                      </div>
-
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="number" class="form-control" value="{{$patient->height}}" name="height" placeholder="Height(cm)"/>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" name="weight" placeholder="Weight(kg)"/>
+                                <input type="number" class="form-control"  value="{{$patient->weight}}" name="weight" placeholder="Weight(kg)"/>
                             </div>
                         </div>
                     </div>
                       <div class="col-md-6">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="file" class="form-control" name="profile_pic" placeholder="profile Picture"/>
+                              <input type="file" class="form-control"  value="{{$patient->profile_pic}}" name="profile_pic" placeholder="profile Picture"/>
                             </div>
                           </div>
                         </div>

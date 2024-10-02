@@ -21,7 +21,7 @@
                       <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                         <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                           <i class="mdi mdi-calendar"></i> Today (10 Jan 2021) </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
                           <a class="dropdown-item" href="#">January - March</a>
                           <a class="dropdown-item" href="#">March - June</a>
                           <a class="dropdown-item" href="#">June - August</a>1
@@ -33,52 +33,52 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
                         <h3 class="font-weight-bold">Personal Information</h3>
                         <br>
                         <!-- First Row of Personal Information -->
                         <div class="row">
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Last Name:</b> <p class="custom-size mb-0">Llado</p></h5>
+                                <h5><b class="card-title">Last Name:</b> <p class="custom-size mb-0">{{$patient->lastname}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">First Name:</b> <p class="custom-size mb-0">Maurene</p></h5>
+                                <h5><b class="card-title">First Name:</b> <p class="custom-size mb-0">{{$patient->firstname}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Middle Name:</b> <p class="custom-size mb-0">Cayao</p></h5>
+                                <h5><b class="card-title">Middle Name:</b> <p class="custom-size mb-0">{{$patient->middlename}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Suffix:</b> <p class="custom-size mb-0"></p></h5>
+                                <h5><b class="card-title">Suffix:</b> <p class="custom-size mb-0">{{$patient->suffix ? $patient->suffix: ''}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Gender:</b> <p class="custom-size mb-0">Male</p></h5>
+                                <h5><b class="card-title">Gender:</b> <p class="custom-size mb-0">{{$patient->gender}}</p></h5>
                             </div>
                         </div>
                         <br>
                         <!-- Second Row of Personal Information -->
                         <div class="row">
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Birth Day:</b> <p class="custom-size mb-0">December 17, 2001</p></h5>
+                                <h5><b class="card-title">Birth Day:</b> <p class="custom-size mb-0">{{$patient->birthday}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Height (cm):</b> <p class="custom-size mb-0">169</p></h5>
+                                <h5><b class="card-title">Height (cm):</b> <p class="custom-size mb-0">{{$patient->height}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Weight (kg):</b> <p class="custom-size mb-0">58</p></h5>
+                                <h5><b class="card-title">Weight (kg):</b> <p class="custom-size mb-0">{{$patient->weight}}</p></h5>
                             </div>
                             <div class="col-12 col-md-auto mb-2">
-                                <h5><b class="card-title">Guardian:</b> <p class="custom-size mb-0">Sean Harvey Orga</p></h5>
+                                <h5><b class="card-title">Guardian:</b> <p class="custom-size mb-0">{{ $patient->parents ? $patient->parents->lastname . ', ' . $patient->parents->firstname . ' ' . $patient->parents->middlename : ' ' }}</p></h5>
                             </div>
                         </div>
                     </div>
                     <!-- Right Side: Client Picture -->
                     <div class="client-picture">
-                         <img src=" {{ asset('img/faces/mau.jpeg') }}" alt="Client Picture" class="img-fluid" style="width: 200px; height: auto;">
+                         <img src=" {{ $patient->profile_pic ? asset('storage/pictures/' . $patient->profile_pic) : '' }}" alt="Client Picture" class="img-fluid" style="width: 200px; height: auto;">
                     </div>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -119,12 +119,16 @@
                             }
                         });
                     </script>
+                    <div class="text-center">
+                    <a href="{{route('edit.index', ['id'=> $patient->id]) }}" class="btn btn-primary">Edit</a>
+                    <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                  </div>
                </div>
               </div>
-             </div>
-            </div>
+             </div>     
           </div>
-          <footer class="footer">
+       </div>
+    <footer class="footer">
   <div class="d-sm-flex justify-content-center justify-content-sm-between">
     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023. Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
     <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ms-1"></i></span>
