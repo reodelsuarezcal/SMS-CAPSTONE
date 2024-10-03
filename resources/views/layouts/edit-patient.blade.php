@@ -97,7 +97,7 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Add Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a></h4>
+                    <h4 class="card-title">Add Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a><a href="{{route('view.profile', ['id' => $patient->id ])}}" class="btn btn-warning btn-sm text-dark" style="float:right; margin-right:2px;">View Profile</a></h4>
                     <form class="form-sample" method="POST" action="{{ route('patient.update', ['id' => $patient->id]) }}" enctype="multipart/form-data">
                       @csrf
                       @method('PUT')
@@ -179,12 +179,12 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <input type="number" class="form-control" value="{{$patient->height}}" name="height" placeholder="Height(cm)"/>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12">
+                              <input type="number" class="form-control" value="{{$patient->height}}" name="height" placeholder="Height (cm)" step="0.01" min="0" />
+                          </div>
+                      </div>
+                  </div>
                     </div>
                     <div class="row">
                     <div class="col-md-6">
