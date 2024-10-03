@@ -44,4 +44,30 @@ class ParentController extends Controller
         }
 
     }
+    public function parentIndex(){
+        $parentsData = parents::all();
+        return view('layouts.parents-data', compact('parentsData'));
+    }
+
+    public function updateParent(Request $request, String $id){
+
+        $parent = parents::findOrFail($id);
+        $parent->lastname = $request->input('lastname');
+        $parent->firstname = $request->input('firstname');
+        $parent->middlename = $request->input('middlename');
+        $parent->birthday = $request->input('birthday');
+        $parent->civil_stat = $request->input('civil_stat');
+        $parent->contact_no = $request->input('contact_no');
+
+        $parent->save();
+        return redirect()->back()->with('success', 'Parent data updated Successfully');
+    }
+
+    public function destroy(String $id){
+
+        $parent = parents::findOrFail($id);
+        $parent->delete();
+        return redirect()->back()->with('success', 'Parent deleted successfully!');
+
+    }
 }

@@ -37,5 +37,7 @@ Route::delete('/patient/{id}/delete', [App\Http\Controllers\PatientController::c
 
 //CRUD OPERATIONS PARENTS
 Route::post('/store-parent', [App\Http\Controllers\ParentController::class, 'store'])->name('add.parent');
-
+Route::get('/parents-data', [App\Http\Controllers\ParentController::class, 'parentIndex'])->name('parent.index');
+Route::put('/update-parent/{id}/update', [App\Http\Controllers\ParentController::class, 'updateParent'])->name('parent.update');
+Route::delete('/parent/{id}/delete', [App\Http\Controllers\ParentController::class, 'destroy'])->name('parent.delete');
 });

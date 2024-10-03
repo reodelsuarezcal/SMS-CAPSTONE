@@ -97,7 +97,7 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Add Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a></h4>
+                    <h4 class="card-title">Add Patient<a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a></h4>
                     <form class="form-sample" method="POST" action="{{ route('store.patient') }}" enctype="multipart/form-data">
                       @csrf
                       <p class="card-description"> Personal information </p>

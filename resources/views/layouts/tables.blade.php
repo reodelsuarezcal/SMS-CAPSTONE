@@ -1,4 +1,36 @@
 @include('includes.base')
+
+<style>
+    .input-group .input-group-text {
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      padding: 0.25rem 0.5rem;
+    }
+    .form-control {
+      border-left: 1px solid #ced4da; 
+    }
+    .icon-search {
+      font-size: 1.2rem; 
+      color: #6c757d; 
+    }
+    #navbar-search-input {
+    padding: 0.50rem 0.50rem;
+    height: 35px; 
+    font-size: 0.875rem; 
+  }
+
+  .input-group-text {
+    padding: 0.25rem 0.5rem;
+    height: 35px; 
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-search {
+    font-size: 0.875rem; 
+  }
+  
+  </style>
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             @if(session('success'))
@@ -36,11 +68,58 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Patients Table</h4>
+                    <h4 class="card-title">Patients Table <a href="javascript:void(0);" class="btn btn-info btn-sm text-white" style="float:right;margin-left:3px;" onclick="printTable()"><i class="mdi mdi-printer menu-icon"></i> Print</a>
+                    <a href="javascript:void(0);" class="btn btn-success btn-sm text-white" style="float:right;margin-right:2px;" onclick="exportTableToExcel('patientTable', 'PatientData')"><i class="mdi mdi-table menu-icon"></i> Excel</a></h4>
                     <p class="card-description"> List of Patients <code> San Miguel PPC</code>
                     </p>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <ul class="navbar-nav col-lg-3">
+                      <li class="nav-item nav-search dblock">
+                      <form action="">
+                        <div class="input-group">
+                        <input type="text" class="form-control " id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+                          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                            <button type="submit" name="submit" class="input-group-text" id="search">
+                              <i class="icon-search"></i>
+                            </button>
+                          </div>
+                          </form>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                     <div class="table-responsive">
-                      <table class="table">
+                    <table id="patientTable" style="display:none;">
+                      <thead>
+                          <tr>
+                              <th>Last Name</th>
+                              <th>First Name</th>
+                              <th>Middle Name</th>
+                              <th>Birthday</th>
+                              <th>Gender</th>
+                              <th style="display:none;">Height (m)</th>
+                              <th style="display:none;">Weight (kg)</th>
+                              <th>Age</th>
+                              <th>Parent/Guardian</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($patientsData as $patient)
+                          <tr>
+                              <td>{{ $patient->lastname }}</td>
+                              <td>{{ $patient->firstname }}</td>
+                              <td>{{ $patient->middlename }}</td>
+                              <td>{{ \Carbon\Carbon::parse($patient->birthday)->format('F j, Y') }}</td>
+                              <td>{{ $patient->gender }}</td>
+                              <td style="display:none;">{{ $patient->height }}</td>
+                              <td style="display:none;">{{ $patient->weight }}</td>
+                              <td class="{{ $patient->age > 5 ? 'text-danger fw-bold' : '' }}">{{ $patient->age }}</td>
+                              <td>{{ $patient->parents ? $patient->parents->lastname . ', ' . $patient->parents->firstname . ' ' . $patient->parents->middlename : ' ' }}</td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
+                      <table  class="table">
                         <thead>
                           <tr>
                             <th>Last Name</th>
@@ -107,15 +186,82 @@
               <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ms-1"></i></span>
             </div>
           </footer>
+          <table id="patientTable" style="display:none;">
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('js/off-canvas.js') }}"></script>
     <script src="{{ asset('js/template.js') }}"></script>
     <script src="{{ asset('js/settings.js') }}"></script>
     <script src="{{ asset('js/todolist.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+      <script>
+       function exportTableToExcel(tableID, filename = 'PatientData') {
+        var table = document.getElementById(tableID);
+        var wb = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
+        XLSX.writeFile(wb, filename + ".xlsx");
+    }
+      </script>
+        <script>
+       function printTable() {
+    // Reference to the table
+    var table = document.getElementById('patientTable');
+    table.style.display = 'table';
+    var printWindow = window.open('', '', 'height=600,width=800');
+    var tableHTML = table.outerHTML;
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Print Patient Table</title>
+                <style>
+                    table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+                /* Set a fixed width for the first column */
+                th:first-child, td:first-child {
+                    width: 100px; /* Set to your desired width */
+                }
+                /* Optional: Adjust other columns as needed */
+                th:nth-child(2), td:nth-child(2) {
+                    width: 150px; /* Example width for the second column */
+                }
+                th:nth-child(3), td:nth-child(3) {
+                    width: 150px; /* Example width for the third column */
+                }
+                </style>
+            </head>
+            <body>
+                <h2>Patient Information</h2>
+                ${tableHTML}
+            </body>
+        </html>
+    `);
+
+    // Close the document and print
+    printWindow.document.close();
+    printWindow.focus(); // Focus on the new window
+    printWindow.print(); // Open print dialog
+
+    // Close the window after printing
+    printWindow.close();
+
+    // Revert the table back to not being displayed
+    table.style.display = 'none'; // Hide the table again
+}
+
+
+
+</script>
   </body>
 </html>

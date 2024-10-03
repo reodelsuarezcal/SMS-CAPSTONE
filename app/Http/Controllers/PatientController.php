@@ -24,10 +24,15 @@ class PatientController extends Controller
         return view('layouts.add-patient', compact('parents'));
     }
 
-    public function viewProfile( String $id){    
+    public function viewProfile(String $id) {    
         $patient = patients::findOrFail($id);
-        return view('layouts.view-profile', compact('patient'));
+        $height = $patient->height;
+        $weight = $patient->weight;
+        $bmiNot = $weight / ($height * $height);
+        $bmi = number_format($bmiNot, 3);
+        return view('layouts.view-profile', compact('patient', 'bmi'));
     }
+    
 
 
     public function store(Request $request)
@@ -41,7 +46,8 @@ class PatientController extends Controller
             $suffix = $request->input('suffix');
             $gender = $request->input('gender');
             $birthday = $request->input('birthday');
-            $height = $request->input('height'); // Use input for height
+            $heightCm = $request->input('height'); 
+            $height = $heightCm / 100;
             $weight = $request->input('weight'); // Use input for weight
             $parent_id = $request->input('parent_id'); // Use input for parent_id
             $age = Carbon::parse($birthday)->age;
@@ -66,7 +72,7 @@ class PatientController extends Controller
                 // return redirect()->back()->with('error', 'Profile picture is required.');
             }
     
-            // Check if patient already exists
+           
             $existingPatient = patients::where('patient_id', $patient_id)->first();
             if ($existingPatient) {
                 return redirect()->back()->with('error', 'Patient already in records!');
@@ -85,6 +91,7 @@ class PatientController extends Controller
                 'parent_id' => $parent_id,
                 'profile_pic' => $profile_pic, 
             ];
+
 
             $patient = patients::create($data);
             if ($patient) {
@@ -117,7 +124,7 @@ class PatientController extends Controller
         $patient->suffix = $request->input('suffix');
         $patient->gender = $request->input('gender');
         $patient->birthday = $request->input('birthday');
-        $patient->height = $request->input('height');
+        $patient->height = $request->input('height') / 100;
         $patient->weight = $request->input('weight'); 
         $patient->parent_id = $request->input('parent_id');
 
@@ -142,6 +149,7 @@ class PatientController extends Controller
     public function destroy(String $id){
     $patient = patients::findOrFail($id);
     $patient->delete();
-    return redirect()->back()->with('success', 'Patient deleted sucessfully!');
+    return redirect()->route('table')->with('success', 'Patient deleted successfully!');
+
     }
 }

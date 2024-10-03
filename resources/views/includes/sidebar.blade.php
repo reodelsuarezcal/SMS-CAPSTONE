@@ -46,17 +46,11 @@
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-        <i class="icon-bar-graph menu-icon"></i>
-        <span class="menu-title">Charts</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="charts">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-        </ul>
-      </div>
-    </li>
+    <a class="nav-link" href="{{ route('parent.index') }} ">
+        <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+        <span class="menu-title">Parents</span>
+    </a>
+   </li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
         <i class="mdi mdi-hospital menu-icon"></i>
