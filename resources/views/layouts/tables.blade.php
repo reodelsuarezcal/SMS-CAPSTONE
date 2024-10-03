@@ -186,7 +186,6 @@
               <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ms-1"></i></span>
             </div>
           </footer>
-          <table id="patientTable" style="display:none;">
         </div>
       </div>
     </div>
