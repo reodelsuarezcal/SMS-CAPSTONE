@@ -162,8 +162,8 @@
                       });
                   </script>
                     <div class="text-center">
-                    <button onclick="printDiv('printableArea')" class="btn btn-secondary">Print</button>
-                    <a href="{{route('edit.index', ['id'=> $patient->id]) }}" class="btn btn-primary text-white fw-bold">Edit</a>
+                    <button onclick="printDiv('printableArea')" class="btn btn-info fw-bold text-white"><i class="mdi mdi-printer"></i> Print</button>
+                    <a href="{{route('edit.index', ['id'=> $patient->id]) }}" class="btn btn-warning text-white fw-bold">Edit</a>
                     <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal{{$patient->id}}" class="btn btn-danger text-white fw-bold"> Delete</a>
                     <div class="modal fade" id="deleteModal{{$patient->id}}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div class="modal-dialog ">

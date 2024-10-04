@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\patients;
+use App\Models\parents;
 
-class PatientsSeeder extends Seeder
+class ParentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        patients::factory()->count(100)->create();
+        parents::factory()->count(20)->create();
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class parents extends Model
 {
+    use HasFactory;
     protected $table = 'parents'; 
     protected $primaryKey = 'id';
     protected $fillable = ['id','lastname','firstname','middlename','birthday','civil_stat','contact_no','created_at','updated_at'];
