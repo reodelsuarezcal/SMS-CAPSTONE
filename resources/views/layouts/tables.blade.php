@@ -65,7 +65,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">
-              <div class="col-lg-12 grid-margin stretch-card">
+              <div class="col-lg-16 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Patients Table <a href="javascript:void(0);" class="btn btn-info btn-sm text-white" style="float:right;margin-left:3px;" onclick="printTable()"><i class="mdi mdi-printer menu-icon"></i> Print</a>
@@ -75,9 +75,9 @@
                     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                     <ul class="navbar-nav col-lg-3">
                       <li class="nav-item nav-search dblock">
-                      <form action="">
+                      <form action="{{ route('patient.search') }}" method="GET">
                         <div class="input-group">
-                        <input type="text" class="form-control " id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+                        <input type="text" class="form-control " id="navbar-search-input" name="searchPatient" placeholder="Search now" aria-label="search" aria-describedby="search">
                           <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
                             <button type="submit" name="submit" class="input-group-text" id="search">
                               <i class="icon-search"></i>
@@ -89,6 +89,16 @@
                     </ul>
                   </div>
                     <div class="table-responsive">
+                    <form method="GET" action="{{ route('table') }}">
+                      <label for="perPage">Items per page:</label>
+                      <select name="perPage" id="perPage" onchange="this.form.submit()">
+                          <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                          <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                          <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+                          <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                          <option value="all" {{ $perPage == 'all' ? 'selected' : '' }}>Show All</option>
+                      </select>
+                  </form>
                     <table id="patientTable" style="display:none;">
                       <thead>
                           <tr>
@@ -172,9 +182,12 @@
                           </tr>
                           @endforeach
                         </tbody>
-                      </table>
+                      </table>                  
                     </div>
                   </div>
+                  @if($perPage != 'all')
+                  {{ $patientsData->appends(['perPage' => $perPage])->links('vendor.pagination.bootstrap-5') }}
+                  @endif
                 </div>
               </div>
             </div>

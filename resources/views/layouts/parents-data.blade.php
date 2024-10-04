@@ -1,4 +1,34 @@
 @include('includes.base')
+<style>
+    .input-group .input-group-text {
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      padding: 0.25rem 0.5rem;
+    }
+    .form-control {
+      border-left: 1px solid #ced4da; 
+    }
+    .icon-search {
+      font-size: 1.2rem; 
+      color: #6c757d; 
+    }
+    #navbar-search-input {
+    padding: 0.50rem 0.50rem;
+    height: 35px; 
+    font-size: 0.875rem; 
+  }
+
+  .input-group-text {
+    padding: 0.25rem 0.5rem;
+    height: 35px; 
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-search {
+    font-size: 0.875rem; 
+  }
+  </style>
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             @if(session('success'))
@@ -39,7 +69,33 @@
                     <h4 class="card-title">Parents Table</h4>
                     <p class="card-description"> List of Parents <code> San Miguel PPC</code>
                     </p>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <ul class="navbar-nav col-lg-3">
+                      <li class="nav-item nav-search dblock">
+                      <form action="{{ route('parent.search') }}" method="GET">
+                        <div class="input-group">
+                        <input type="text" class="form-control " id="navbar-search-input" name="searchParent" placeholder="Search now" aria-label="search" aria-describedby="search">
+                          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                            <button type="submit" name="submit" class="input-group-text" id="search">
+                              <i class="icon-search"></i>
+                            </button>
+                          </div>
+                          </form>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                     <div class="table-responsive">
+                    <form method="GET" action="{{ route('parent.index') }}">
+                      <label for="perPage">Items per page:</label>
+                      <select name="perPage" id="perPage" onchange="this.form.submit()">
+                          <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                          <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                          <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+                          <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                          <option value="all" {{ $perPage == 'all' ? 'selected' : '' }}>Show All</option>
+                      </select>
+                  </form>
                       <table class="table">
                         <thead>
                           <tr>
@@ -119,14 +175,14 @@
                                 <div class="modal-dialog ">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="myModalLabel">Delete Patient</h5>
+                                        <h5 class="modal-title" id="myModalLabel">Delete Parent</h5>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
                                       <form action="{{route('parent.delete', ['id' => $parent->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                      <p>Delete <span class="text-danger fw-bold">{{$parent->lastname}}, {{$parent->firstname}} {{$parent->middlename}}</span> as patient?</p>
+                                      <p>Delete <span class="text-danger fw-bold">{{$parent->lastname}}, {{$parent->firstname}} {{$parent->middlename}}</span> as parent?</p>
                                   </div>
                                   <div class="modal-footer">
                                         <button type="submit" name="submit" class="btn btn-danger btn-sm text-white fw-bold">Delete</button>
@@ -143,6 +199,9 @@
                       </table>
                     </div>
                   </div>
+                  @if($perPage != 'all')
+                  {{ $parentsData->appends(['perPage' => $perPage])->links('vendor.pagination.bootstrap-5') }}
+                  @endif
                 </div>
               </div>
             </div>

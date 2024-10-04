@@ -44,9 +44,16 @@ class ParentController extends Controller
         }
 
     }
-    public function parentIndex(){
-        $parentsData = parents::all();
-        return view('layouts.parents-data', compact('parentsData'));
+    public function parentIndex(Request $request){
+
+        $perPage = $request->input('perPage', 10);
+        
+        if ($perPage == 'all') {
+            $parentsData = parents::all();
+        } else {
+            $parentsData = parents::paginate($perPage); 
+        }
+        return view('layouts.parents-data', compact('parentsData','perPage'));
     }
 
     public function updateParent(Request $request, String $id){
@@ -70,4 +77,35 @@ class ParentController extends Controller
         return redirect()->back()->with('success', 'Parent deleted successfully!');
 
     }
+
+    public function searchParent(Request $request)
+    {
+
+        $searchParent = $request->input('searchParent');
+        $query = Parents::orderBy('lastname', 'ASC');
+    
+        
+        if (!empty($searchParent)) {
+            $query->where(function ($q) use ($searchParent) {
+                $q->where('id', 'LIKE', '%' . $searchParent . '%')
+                  ->orWhere('lastname', 'LIKE', '%' . $searchParent . '%')
+                  ->orWhere('firstname', 'LIKE', '%' . $searchParent . '%')
+                  ->orWhere('middlename', 'LIKE', '%' . $searchParent . '%')
+                  ->orWhere('civil_stat', 'LIKE', '%' . $searchParent . '%')
+                  ->orWhere('contact_no', 'LIKE', '%' . $searchParent . '%');
+            });
+        }
+    
+        $perPage = $request->input('perPage', 'all');
+        if ($perPage === 'all') {
+            $parentsData = $query->get();
+        } else {
+            $parentsData = $query->paginate($perPage);
+        }
+        if ($parentsData->isEmpty()) {
+            return redirect()->back()->with('error', 'No results found for your search.');
+        }
+        return view('layouts.parents-data', compact('parentsData', 'perPage'));
+    }
+    
 }

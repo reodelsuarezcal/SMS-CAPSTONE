@@ -13,10 +13,16 @@ use Carbon\Carbon;
 
 class PatientController extends Controller
 {
-    public function index (){
+    public function index (Request $request){
         
-        $patientsData = patients::all();
-        return view('layouts.tables', compact ('patientsData'));
+        $perPage = $request->input('perPage', 10);
+        
+        if ($perPage == 'all') {
+            $patientsData = patients::all();
+        } else {
+            $patientsData = patients::paginate($perPage); 
+        }
+        return view('layouts.tables', compact ('patientsData','perPage'));
     }
 
     public function addIndex(){
@@ -152,4 +158,43 @@ class PatientController extends Controller
     return redirect()->route('table')->with('success', 'Patient deleted successfully!');
 
     }
+
+    public function searchPatient(Request $request)
+    
+    {
+       
+        $search = $request->input('searchPatient');
+        $query = patients::with('parents') 
+            ->orderBy('lastname', 'ASC');
+        
+        if (strlen($search) > 0) {
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'LIKE', '%' . $search . '%')
+                  ->orWhere('lastname', 'LIKE', '%' . $search . '%')
+                  ->orWhere('firstname', 'LIKE', '%' . $search . '%')
+                  ->orWhere('middlename', 'LIKE', '%' . $search . '%')
+                  ->orWhere('gender', 'LIKE', '%' . $search . '%')
+                  ->orWhere('birthday', 'LIKE', '%' . $search . '%')
+                  ->orWhere('height', 'LIKE', '%' . $search . '%')
+                  ->orWhere('weight', 'LIKE', '%' . $search . '%')
+                  ->orWhereHas('parents', function ($parentQuery) use ($search) {
+                      $parentQuery->where('lastname', 'LIKE', '%' . $search . '%')
+                                  ->orWhere('firstname', 'LIKE', '%' . $search . '%')
+                                  ->orWhere('middlename', 'LIKE', '%' . $search . '%')
+                                  ->orWhere('civil_stat', 'LIKE', '%' . $search . '%');
+                  });
+            });
+        }
+        $perPage = $request->input('perPage', 'all');
+        if ($perPage === 'all') {
+            $patientsData = $query->get();
+        } else {
+            $patientsData = $query->paginate($perPage); 
+        }
+        if ($patientsData->isEmpty()) {
+            return redirect()->back()->with('error', 'No results found for your search.');
+        } 
+        return view('layouts.tables', compact('patientsData', 'perPage'));
+    }
+    
 }

@@ -14,7 +14,7 @@
 </li> -->
 <li class="nav-item {{ request()->routeIs('table') || request()->routeIs('add.index') ? 'active' : '' }}">
     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-        <i class="mdi mdi-folder-multiple-outline menu-icon"></i>
+        <i class="mdi mdi-account-multiple menu-icon"></i>
         <span class="menu-title">Patient</span>
         <i class="menu-arrow"></i>
     </a>
