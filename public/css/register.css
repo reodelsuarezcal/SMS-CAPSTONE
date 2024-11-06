@@ -1,0 +1,481 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-image: url('../img/SIGN UP.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center; /* Center vertically */
+}
+
+.container {
+    width: 400px; /* Set container width */
+    max-width: 100%; /* Prevent overflow on smaller screens */
+    padding: 20px;
+    display: flex; /* Use flexbox for form alignment */
+    justify-content: center; 
+    margin: -50px 200px 0; /* Add negative top margin to move it up */
+}
+
+.register-form {
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(170, 165, 165, 0);
+    width: 100%;
+}
+
+.register-form h2 {
+    font-family: 'Montserrat', sans-serif; /* Change to Montserrat */
+    margin-bottom: 25px;
+    text-align: left;
+    color:  #333333;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style for the terms checkbox */
+.terms-container {
+    display: flex;
+    align-items: center; /* Align checkbox and text vertically */
+    margin-top: 10px; /* Space above the terms section */
+    font-size: 0.9em; /* Slightly smaller font size */
+    color: #666; /* Grey color for the text */
+}
+
+.terms-container input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and label */
+    border-radius: 10;
+    
+}
+
+.terms-container a {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+    
+
+}
+
+.terms-container a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for links */
+.form-links {
+    display: flex;
+    justify-content: space-between; /* Space between the links */
+    margin-top: 15px; /* Space above the links */
+    font-size: 0.9em; /* Slightly smaller font size */
+    color: #666; /* Grey color for the text */
+    text-align: center;
+}
+
+.form-links a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.form-links a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.input-icon {
+    position: relative; /* Position relative for absolute positioning of icons */
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Add padding to make space for the icon */
+    border: 1px solid #868484;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0); /* Transparent background */
+    font-size: 16px;
+    color: #333333;
+    transition: border-color 0.2s;
+}
+
+.input-icon input:focus {
+    outline: none;
+    border-color: #0b5ed7; /* Change border color on focus */
+}
+
+.input-icon i {
+    position: absolute;
+    right: 15px; /* Position the icon on the right */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3e404b;
+    cursor: pointer; /* Change cursor to pointer for eye icon */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 24px; /* Add some space above */
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #0b5ed7;
+}
+
+.invalid-feedback {
+    color: red; /* Or any other color you prefer */
+    font-size: 0.9em;
+}
+
+.is-invalid {
+    border: 1px solid red; /* Highlight input fields with an error */
+}
+
+   /* Modal Base Styles */
+   .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(63, 62, 62, 0.5);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: #fff;
+    width: 92%;
+    max-width: 460px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Header Styles */
+.modal-header {
+    text-align: center;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.modal-back {
+    position: absolute;
+    top: 10px; /* Adjusted for better vertical positioning */
+    left: 24px;
+    transform: none; /* Removed translateY for simpler alignment */
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    width: 45px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.modal-back:hover {
+    background-color: #D1D5DB;
+}
+
+
+
+.modal-title {
+    font-family: 'Arial', sans-serif;
+    font-size: clamp(18px, 5vw, 20px);
+    color: #333333;
+    margin: 0;
+    font-weight: 600;
+}
+
+.last-updated {
+    font-size: clamp(12px, 3.5vw, 13px);
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Body Styles */
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: clamp(16px, 5vw, 24px);
+    -webkit-overflow-scrolling: touch;
+}
+
+.section {
+    margin-bottom: clamp(16px, 5vw, 24px);
+}
+
+.section-title {
+    font-family: 'Arial', sans-serif;
+    font-size: clamp(14px, 4vw, 16px);
+    color: #333333;
+    margin: 0 0 12px;
+    font-weight: 600;
+}
+
+.section-content {
+    font-size: clamp(13px, 3.5vw, 14px);
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+
+/* Footer Styles */
+.modal-footer {
+    padding: clamp(12px, 4vw, 16px) clamp(16px, 5vw, 24px);
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 12px;
+    background: white;
+}
+
+.btn-modal {
+    flex: 1;
+    padding: clamp(8px, 3vw, 10px) clamp(16px, 5vw, 20px);
+    border-radius: 20px;
+    border: none;
+    font-size: clamp(13px, 3.5vw, 14px);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    margin-bottom: 10px; /* Add margin to the top of the buttons */
+
+}
+
+.btn-decline {
+    background-color: #f3f4f6;
+    color: #333333;
+}
+
+.btn-decline:hover {
+    transform: translateY(-2px);
+    background-color: #D1D5DB;
+}
+
+.btn-accept {
+    background-color: #0d6efd;
+    color: white;
+
+}
+
+.btn-accept:hover {
+    transform: translateY(-2px);
+    background-color: #0b5ed7;
+}
+
+/* Scrollbar Styles */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 3px;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .btn-modal {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .btn-modal:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .modal-content {
+        max-width: 600px;
+        width: 85%;
+    }
+
+    .modal {
+        padding: 20px;
+    }
+}
+
+
+    /* Mobile Styles */
+    @media (max-width: 767px) {
+        .modal {
+            align-items: flex-end;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-height: 90vh;
+            border-radius: 16px 16px 0 0;
+            margin: 0;
+        }
+
+        .modal-back {
+            top: 0px;
+            transform: none;
+        }
+
+        .modal-header {
+            padding: 20px 16px 12px;
+        }
+
+        .modal-footer {
+            padding: 16px;
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+        }
+
+        /* Improve touch targets */
+        .btn-modal {
+            min-height: 44px;
+        }
+
+        .modal-back {
+            min-width: 44px;
+            min-height: 44px;
+        }
+    }
+
+    /* Small Mobile Styles */
+    @media (max-width: 360px) {
+        .modal-footer {
+            flex-direction: column;
+        }
+
+        .btn-modal {
+            width: 100%;
+        }
+    }
+
+    /* Landscape Mode */
+    @media (max-height: 500px) and (orientation: landscape) {
+        .modal {
+            align-items: center;
+        }
+
+        .modal-content {
+            max-height: 95vh;
+            border-radius: 8px;
+        }
+
+        .modal-body {
+            padding: 16px;
+        }
+    }
+
+    /* High DPI Screens */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .btn-modal {
+            font-smooth: always;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    body {
+        background-image: url('../img/signupmobile.png');
+        background-color: transparent;
+        justify-content: center;
+        align-items: center; /* Center vertically */
+    }
+
+    .container {
+        width: 500px; /* Fix: Set width to 500px on mobile */
+        max-width: 100%; /* Prevent overflow */
+        padding: 20px;
+        margin: 0; /* Ensure no margin on the right */
+        margin-top: 235px; /* Adjust margin as needed */
+    }
+
+    .register-form h2 {
+        font-size: 30px;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 50px;
+        text-align: center;
+        color: #333333;
+    }
+
+    .register-form {
+        padding: 15px; /* Slightly reduce padding */
+    }
+
+    .form-group {
+        margin-bottom: 18px; /* Reduce margin for form groups */
+    }
+
+    .input-icon input {
+        padding: 11px 32px 11px 11px; /* Adjust padding for mobile */
+    }
+
+    .input-icon i {
+        right: 15px; /* Adjust icon position for mobile */
+    }
+
+    button {
+        padding: 11px; /* Adjust button padding */
+        
+    }
+
+    .form-links {
+        justify-content: center; /* Center the links horizontally */
+        flex-direction: column; /* Stack links vertically */
+        align-items: center; /* Center items in the flex container */
+    }
+
+    .form-links span {
+        display: none; /* Hide the separator on mobile */
+    }
+}
