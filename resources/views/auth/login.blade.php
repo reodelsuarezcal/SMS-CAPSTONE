@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Login</title>
+    <title>Login Page</title>
 </head>
 <body>
     <div class="container">
@@ -19,9 +19,7 @@
                     <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                 </div>
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
@@ -30,9 +28,7 @@
                     <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
                 
                     @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <span class="invalid-feedback">{{ $message }}</span>
                    @enderror 
                 </div>
             </div>
@@ -47,11 +43,11 @@
                     <a href="{{ route('password.request') }}">Forgot Password?</a>
                 @endif
                 <span>  </span>
-                <a href="{{ route('register') }}">Create a New Account</a> <!-- Create Account Link -->
+                <a href="{{ route('register') }}">Create a New Account</a> 
             </div>
             <br>
             <div class="terms-container">
-    <p>By logging in, you agree to our <a href="#" class="terms-link" onclick="showModal(event, 'terms')">Terms of Service </a>and acknowledge our <a href="#" class="terms-link" onclick="showModal(event, 'privacy')">Privacy Policy</a>.</p>
+    <p>By logging in, you agree to our <a href="#" class="terms-link" onclick="showModal(event, 'terms')">Terms </a>and you have read our <a href="#" class="terms-link" onclick="showModal(event, 'privacy')">Privacy Policy</a>.</p>
 </div>          
         </form>
     </div>
@@ -138,9 +134,6 @@
 </div>
         </div>
     </div>
-
-
-    <!-- Privacy Policy Modal -->
 <div id="privacyModal" class="modal" style="display: none;">
     <div class="modal-content">
         <button class="modal-back">
@@ -231,7 +224,6 @@
         </div>
     </div>
 </div>
-    <!-- Onboarding Interface -->
     <div class="onboarding-container" id="onboarding">
         <div class="slide-container">
             <div class="slide active">
@@ -277,9 +269,6 @@
         </div>
     </div>
 
-    <!-- Onboarding Interface end -->
-
-
     <script>
 const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
         if (hasSeenOnboarding) {
@@ -292,7 +281,6 @@ const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
         const dots = document.querySelectorAll('.dot');
         const nextBtn = document.querySelector('.btn-next');
 
-        // Add touch swipe functionality
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -311,10 +299,10 @@ const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
 
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
-                    // Swipe left
+
                     nextSlide();
                 } else {
-                    // Swipe right
+     
                     previousSlide();
                 }
             }
@@ -388,91 +376,97 @@ const backBtn = document.querySelectorAll('.modal-back');
 const acceptTermsBtn = document.getElementById('acceptTerms');
 const acceptPrivacyBtn = document.getElementById('acceptPrivacy');
 
-// Show the modal based on the type passed (either 'terms' or 'privacy')
 function showModal(event, type) {
-    if(event) event.preventDefault();
+    if (event) event.preventDefault();
 
-    // Hide both modals initially
     modal.style.display = 'none';
     privacyModal.style.display = 'none';
 
-    // Show the correct modal based on the type
     if (type === 'terms') {
         modal.style.display = 'flex';
     } else if (type === 'privacy') {
         privacyModal.style.display = 'flex';
     }
 
-    document.body.style.overflow = 'hidden'; // Disable body scroll
+    document.body.style.overflow = 'hidden';
 }
 
-// Close the modal
 function closeModal() {
     modal.style.display = 'none';
     privacyModal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable body scroll
+    document.body.style.overflow = 'auto';
 }
 
-// Close the modal when back button is clicked
 backBtn.forEach(button => {
     button.addEventListener('click', closeModal);
 });
 
-// Handle acceptance of Terms of Service
 acceptTermsBtn.addEventListener('click', () => {
     console.log('Terms accepted');
     closeModal();
 });
 
-// Handle acceptance of Privacy Policy
 acceptPrivacyBtn.addEventListener('click', () => {
     console.log('Privacy Policy accepted');
     closeModal();
 });
 
-// Close the modal if the user clicks outside of it
 window.addEventListener('click', (e) => {
     if (e.target === modal || e.target === privacyModal) {
         closeModal();
     }
 });
 
-// Close the modal when the escape key is pressed
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal();
     }
 });
 
-// Dragging functionality for touch devices (screens <= 767px)
 let startY = 0;
 let currentY = 0;
+let isDragging = false;
+const closeThreshold = 100;
 
-modalContent.addEventListener('touchstart', (e) => {
-    if (window.innerWidth <= 767) {
-        startY = e.touches[0].clientY; // Capture starting position
-    }
-});
-
-modalContent.addEventListener('touchmove', (e) => {
-    if (window.innerWidth <= 767) {
-        currentY = e.touches[0].clientY; // Get current position
-        let deltaY = currentY - startY;
-
-        // Prevent default touchmove behavior to avoid scrolling
-        e.preventDefault();
-
-        // Only allow dragging downward if the movement is small enough
-        if (deltaY > 0) {
-            modalContent.style.transform = `translateY(${deltaY}px)`; // Apply drag effect
+function addDragEventListeners(modalToDrag) {
+    const modalContent = modalToDrag.querySelector('.modal-content');
+    
+    modalContent.addEventListener('touchstart', (e) => {
+        if (window.innerWidth <= 767) {
+            startY = e.touches[0].clientY;
+            isDragging = true;
         }
-    }
-});
+    });
 
-modalContent.addEventListener('touchend', () => {
-    // Reset modal position when touch ends
-    modalContent.style.transform = 'translateY(0)';
-});
+    modalContent.addEventListener('touchmove', (e) => {
+        if (window.innerWidth <= 767 && isDragging) {
+            currentY = e.touches[0].clientY;
+            let deltaY = currentY - startY;
+
+            e.preventDefault();
+
+            if (deltaY > 0) {
+                modalContent.style.transform = `translateY(${deltaY}px)`;
+            }
+        }
+    });
+
+    modalContent.addEventListener('touchend', () => {
+        if (isDragging) {
+            const deltaY = currentY - startY;
+            if (deltaY > closeThreshold) {
+                closeModal();
+            } else {
+                modalContent.style.transform = 'translateY(0)';
+            }
+
+            isDragging = false;
+        }
+    });
+}
+
+addDragEventListeners(modal);
+addDragEventListeners(privacyModal);
 
     </script>
 </body>

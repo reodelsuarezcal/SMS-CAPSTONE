@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Register</title>
+    <title>Register Page</title>
 </head>
 <body>
     <div class="container">
@@ -19,9 +19,7 @@
                     <input id="name" type="text" class="@error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
                 </div>
                 @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
 
@@ -31,35 +29,36 @@
                     <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
                 </div>
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="invalid-feedback">{{ $message }}</span>
                 @enderror
             </div>
 
-            <div class="form-group">
-                <div class="input-icon">
-                    <i class="fas fa-eye" id="togglePassword" onclick="togglePassword()"></i>
-                    <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror 
-                </div>
-            </div>
+        
+
 
             <div class="form-group">
-                <div class="input-icon">
-                    <i class="fas fa-eye" id="togglePasswordConfirm" onclick="togglePasswordConfirm()"></i>
-                    <input id="password-confirm" type="password" class="@error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                    @error('password_confirmation')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror 
-                </div>
-            </div>
+    <div class="input-icon">
+        <i class="fas fa-eye" id="togglePassword" onclick="togglePassword()"></i>
+        <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password" minlength="8">
+        <span class="error-message" id="password-error" style="display: none;">Password must be at least 8 characters</span>
+        @error('password')
+        <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="input-icon">
+        <i class="fas fa-eye" id="togglePasswordConfirm" onclick="togglePasswordConfirm()"></i>
+        <input id="password-confirm" type="password" class="@error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password" minlength="8">
+        <span class="error-message" id="confirm-password-error" style="display: none;">Password must be at least 8 characters</span>
+        @error('password_confirmation')
+        <span class="invalid-feedback">{{ $message }}</span>
+            </span>
+        @enderror
+    </div>
+</div>
+
 
             <div class="terms-container">
     <input type="checkbox" id="terms" required>
@@ -186,7 +185,6 @@ const modal = document.getElementById('termsModal');
             document.body.style.touchAction = 'none';
         }
 
-        // Show modal when clicking on terms link
         document.querySelectorAll('.terms-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -194,7 +192,6 @@ const modal = document.getElementById('termsModal');
             });
         });
 
-        // Handle touch events for mobile
         let startY = 0;
         let currentY = 0;
         const modalContent = modal.querySelector('.modal-content');

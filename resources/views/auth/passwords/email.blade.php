@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="{{ asset('css/email.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -10,9 +10,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Forgot Your Password?</h2>
+        <h2>Forgot Password?</h2>
         <p class="description">
-        In order to reset your password, please enter the email associated with your Stripe account.
+        In order to reset your password, enter the email associated with your account for instructions.
         </p>
 
         <form method="POST" action="{{ route('password.email') }}">
@@ -27,6 +27,7 @@
                     autocomplete="email" 
                     autofocus
                 >
+                <i class="fas fa-envelope"></i> <!-- Email icon -->
                 <div class="error-message" id="emailError">
                     @error('email')
                         {{ $message }}
@@ -37,11 +38,8 @@
             <button type="submit">Send Password Reset Link</button>
         </form>
 
-
-        </p>
-
         <div class="footer">
-        Already have an account? <a href="{{ route('login') }}">Log in</a>
+            Already have an account? <a href="{{ route('login') }}">Sign in</a>
         </div>
     </div>
 

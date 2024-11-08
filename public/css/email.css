@@ -1,135 +1,141 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Georgia;
-            -webkit-tap-highlight-color: transparent;
-        }
+body {
+    background-color: #DAE7FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 16px;
+}
 
-        body {
-            background-color: #DAE7FF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 16px;
-        }
+.container {
+    background: #FFFCFC;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
 
-        .container {
-            background: #FFFCFC;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            padding: 32px 24px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
+h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
 
-        h2 {
-            
-            color: #333;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            padding: 0 12px;
-            font-family: 'Arial', regular; /* Change to Montserrat */
-        }
+.description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    padding: 0 12px;
+}
 
-        .description {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 24px;
-            padding: 0 12px;
-        }
+.form-group {
+    margin-bottom: 16px;
+    text-align: left;
+    position: relative; /* Ensure icon is positioned correctly */
+}
 
-        .form-group {
-            margin-bottom: 16px;
-            text-align: left;
-        }
+input[type="email"] {
+    width: 100%;
+    padding: 13px 40px 13px 13px; /* Add padding to make space for the icon */
+    border-radius: 12px;
+    border: 1px solid #969595;
+    font-size: 16px;
+    color: #333;
+    background-color: transparent;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
 
-        input[type="email"] {
-            width: 100%;
-            padding: 10px 40px 10px 10px; /* Add padding to make space for the icon */
-            border: 1px solid transparent;
-            border-radius: 8px;
-            border: 1px solid #868484;
-            font-size: 16px;
-            color: #333;
-            background-color: transparent;
-            transition: border-color 0.2s;
-            -webkit-appearance: none;
-            appearance: none;
-        }
+input[type="email"]:focus {
+    outline: none;
+    border-color: #0d6efd;
+}
 
-        input[type="email"]:focus {
-            outline: none;
-            border-color: #0b5ed7;
-        }
+.form-group .fa-envelope {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #3e404b;
+}
 
-        /* Disable iOS input shadows */
-        input[type="email"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
+button {
+    width: 100%;
+    padding: 13px 24px;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 8px;
+}
 
-        button {
-            width: 100%;
-            padding: 10px 24px;
-            background: #0d6efd;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            -webkit-appearance: none;
-            appearance: none;
-            margin-top: 8px;
-        }
+button:hover {
+    background: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  }
 
-        
-        button:hover {
-            background: #0b5ed7;
-        }
+button:hover {
+    background: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
 
-        button:active {
-            background: #0b5ed7;
-            transform: translateY(1px);
-        }
+button:active {
+    background: #0b5ed7;
+    transform: translateY(1px);
+}
 
-        .footer {
-            margin-top: 24px;
-            font-size: 14px;
-            color: #666;
-            padding: 0 12px;
-        }
+.footer {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #666;
+    padding: 0 12px;
+}
 
-        .footer a {
-            color: #0b5ed7;
-            text-decoration: none;
-            font-weight: 500;
-        }
+.footer a {
+    color: #0b5ed7;
+    text-decoration: none;
+    font-weight: 500;
+}
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+.footer a:hover {
+    text-decoration: underline;
+}
 
-        .error-message {
-            color: #ef4444;
-            font-size: 14px;
-            margin-top: 8px;
-            display: none;
-            padding: 0 4px;
-        }
+.error-message {
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+    padding: 0 4px;
+}
 
-       /* Mobile Specific Styles */
+/* Mobile Specific Styles */
 @media (max-width: 480px) {
     body {
-        background-image: url('../img/resetmobile.png'); /* Path to your background image */
+        background-color: white;
+        background-image: url('../img/forgotpassword.png'); /* Path to your background image */
         background-size: cover; /* Cover the entire area */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Prevent tiling */
@@ -141,35 +147,32 @@
         background-color: transparent;
         box-shadow: none;
         border-radius: 0;
-        padding: 24px 16px;
-        height: 100vh; /* Full viewport height */
+        padding: 50px 16px;
         display: flex;
         flex-direction: column;
     }
 
     h2 {
-        font-size: 25px;
-        margin-top: 330px; /* Adjust as needed */
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
+        margin-top: 140px; /* Adjust as needed */
     }
 
     .description {
         font-size: 14px;
-        margin-bottom: 32px;
-
+        margin-bottom: 50px;
     }
 
     input[type="email"] {
-        font-size: 13px;
-        padding: 12px 16px;
+        padding: 13px 16px;
     }
 
     button {
         padding: 13px;
         margin-top: 10px;
         font-size: 16px;
+
     }
-
-
 
     .footer {
         padding-bottom: 24px;
@@ -191,7 +194,7 @@
     }
 
     input[type="email"] {
-        padding: 12px 14px;
+        padding: 12px 16px;
     }
 }
 
