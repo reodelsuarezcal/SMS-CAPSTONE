@@ -13,17 +13,42 @@ use Carbon\Carbon;
 
 class PatientController extends Controller
 {
-    public function index (Request $request){
-        
-        $perPage = $request->input('perPage', 10);
-        
-        if ($perPage == 'all') {
-            $patientsData = patients::all();
-        } else {
-            $patientsData = patients::paginate($perPage); 
-        }
-        return view('layouts.tables', compact ('patientsData','perPage'));
+    public function index(Request $request)
+{
+    $perPage = $request->input('perPage', 10);
+    $ageGroup = $request->input('ageGroup');
+
+    // Base query for patients
+    $query = patients::query();
+
+    // Apply age group filtering
+    if ($ageGroup === '0-5') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 0 AND 5');
+    } elseif ($ageGroup === '6-11') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 6 AND 11');
+    } elseif ($ageGroup === '12-23') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 12 AND 23');
+    } elseif ($ageGroup === '24-35') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 24 AND 35');
+    } elseif ($ageGroup === '36-47') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 36 AND 47');
+    } elseif ($ageGroup === '48-59') {
+        $query->whereRaw('TIMESTAMPDIFF(MONTH, birthday, CURDATE()) BETWEEN 48 AND 59');
     }
+
+    // Pagination logic
+    if ($perPage == 'all') {
+        $patientsData = $query->get();
+    } else {
+        $patientsData = $query->paginate($perPage);
+    }
+
+    return view('layouts.tables', compact('patientsData', 'perPage', 'ageGroup'));
+}
+
+
+
+    
 
     public function addIndex(){
         $parents = parents::with('patients')->get();
@@ -56,7 +81,7 @@ class PatientController extends Controller
             $height = $heightCm / 100;
             $weight = $request->input('weight'); // Use input for weight
             $parent_id = $request->input('parent_id'); // Use input for parent_id
-            $age = Carbon::parse($birthday)->age;
+            $age = Carbon::parse($birthday)->diffInMonths(Carbon::now());
     
             // Handle file upload for profile picture
             if ($request->hasFile('profile_pic')) {

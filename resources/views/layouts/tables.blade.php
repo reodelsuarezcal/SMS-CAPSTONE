@@ -89,7 +89,7 @@
                     </ul>
                   </div>
                     <div class="table-responsive">
-                    <form method="GET" action="{{ route('table') }}">
+                    <!-- <form method="GET" action="{{ route('table') }}">
                       <label for="perPage">Items per page:</label>
                       <select name="perPage" id="perPage" onchange="this.form.submit()">
                           <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
@@ -98,7 +98,29 @@
                           <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
                           <option value="all" {{ $perPage == 'all' ? 'selected' : '' }}>Show All</option>
                       </select>
-                  </form>
+                  </form> -->
+                   <form method="GET" action="{{ route('table') }}">
+                  <label for="perPage">Items per page:</label>
+                  <select name="perPage" id="perPage" onchange="this.form.submit()">
+                      <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                      <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                      <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+                      <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                      <option value="all" {{ $perPage == 'all' ? 'selected' : '' }}>Show All</option>
+                  </select>
+
+                    <label for="ageGroup">Age Group:</label>
+                    <select name="ageGroup" id="ageGroup" onchange="this.form.submit()">
+                        <option value="">All Ages</option>
+                        <option value="0-5" {{ $ageGroup == '0-5' ? 'selected' : '' }}>0-5 months</option>
+                        <option value="6-11" {{ $ageGroup == '6-11' ? 'selected' : '' }}>6-11 months</option>
+                        <option value="12-23" {{ $ageGroup == '12-23' ? 'selected' : '' }}>12-23 months</option>
+                        <option value="24-35" {{ $ageGroup == '24-35' ? 'selected' : '' }}>24-35 months</option>
+                        <option value="36-47" {{ $ageGroup == '36-47' ? 'selected' : '' }}>36-47 months</option>
+                        <option value="48-59" {{ $ageGroup == '48-59' ? 'selected' : '' }}>48-59 months</option>
+                    </select>
+                </form>
+
                     <table id="patientTable" style="display:none;">
                       <thead>
                           <tr>
@@ -137,7 +159,7 @@
                             <th>Middle Name</th>
                             <th>Birthday</th>
                             <th>Gender</th>
-                            <th>Age</th>
+                            <th>Age in Month</th>
                             <th>Parent/Guardian</th>
                             <th>Action</th>
                           </tr>
