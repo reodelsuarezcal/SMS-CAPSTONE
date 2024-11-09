@@ -14,7 +14,7 @@
         "vite": "^5.4.9"
     },
     "dependencies": {
-        "@fullcalendar/core": "^6.1.15",
-        "@fullcalendar/daygrid": "^6.1.15"
+        "@fullcalendar/core": "^5.11.5",
+        "@fullcalendar/daygrid": "^5.11.5"
     }
 }
