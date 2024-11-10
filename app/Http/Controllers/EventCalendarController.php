@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventCalendarController extends Controller
 {
@@ -18,7 +19,7 @@ class EventCalendarController extends Controller
         }
   
         $events = Event::all(); 
-        return view('layouts.full-calendar', compact('events'));
+        return view('layouts.calendar', compact('events'));
     }
 
     public function ajax(Request $request)
@@ -60,12 +61,39 @@ class EventCalendarController extends Controller
                 break;
         }
     }
-
-    public function calendar(){
-        return view('layouts.full-calendar');
-    }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+//     public function calendar(){
+//         return view('layouts.full-calendar');
+//     }
+
+
 
 //     public function index()
 //     {
@@ -75,7 +103,7 @@ class EventCalendarController extends Controller
 //     }
 
 //     public function calendar(){
-//         return view('layouts.full-calendar');
+//         return view('layouts.calendar');
 //     }
 
 //     public function store(Request $request)

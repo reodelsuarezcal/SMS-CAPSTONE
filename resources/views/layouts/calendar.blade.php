@@ -115,16 +115,8 @@ $(document).ready(function () {
         editable: true,
         events: SITEURL + "/fullcalender",
         displayEventTime: false,
-        editable: true,
         selectable: true,
         selectHelper: true,
-
-        // Event Rendering
-        eventRender: function (event, element) {
-            // Highlight event span with custom color
-            element.css('background-color', '#007bff');  // Blue background for events
-            element.css('color', '#fff');                 // White text color
-        },
 
         // Select event to create
         select: function (start, end, allDay) {
@@ -145,7 +137,6 @@ $(document).ready(function () {
                     success: function (data) {
                         displayMessage("Event Created Successfully");
 
-                        // Render the event on the calendar
                         calendar.fullCalendar('renderEvent', {
                             id: data.id,
                             title: title,
@@ -157,7 +148,7 @@ $(document).ready(function () {
                         calendar.fullCalendar('unselect');
                         loadEventsInSidebar(); // Refresh sidebar
                     },
-                    error: function (xhr, status, error) {
+                    error: function (xhr) {
                         console.error("Error:", xhr.responseText);
                     }
                 });
@@ -179,36 +170,61 @@ $(document).ready(function () {
                     type: 'update'
                 },
                 type: "POST",
-                success: function (response) {
+                success: function () {
                     displayMessage("Event Updated Successfully");
                     loadEventsInSidebar(); // Refresh sidebar
                 },
-                error: function (xhr, status, error) {
+                error: function (xhr) {
                     console.error("Error:", xhr.responseText);
                 }
             });
         },
 
-        // Event Click (Delete)
+        // Event Click (Edit or Delete)
         eventClick: function (event) {
-            var deleteMsg = confirm("Do you really want to delete?");
-            if (deleteMsg) {
+            var newTitle = prompt("Edit Event Title:", event.title);
+            if (newTitle) {
+                // Update the title
                 $.ajax({
-                    type: "POST",
                     url: SITEURL + '/fullcalenderAjax',
                     data: {
+                        title: newTitle,
+                        start: $.fullCalendar.formatDate(event.start, "Y-MM-DD"),
+                        end: $.fullCalendar.formatDate(event.end, "Y-MM-DD"),
                         id: event.id,
-                        type: 'delete'
+                        type: 'update'
                     },
-                    success: function (response) {
-                        calendar.fullCalendar('removeEvents', event.id);
-                        displayMessage("Event Deleted Successfully");
-                        loadEventsInSidebar(); // Refresh sidebar
+                    type: "POST",
+                    success: function () {
+                        event.title = newTitle;
+                        $('#calendar').fullCalendar('updateEvent', event);  // Update event in calendar
+                        displayMessage("Event Updated Successfully");
+                        loadEventsInSidebar();  // Refresh sidebar
                     },
-                    error: function (xhr, status, error) {
+                    error: function (xhr) {
                         console.error("Error:", xhr.responseText);
                     }
                 });
+            } else {
+                var deleteMsg = confirm("Do you really want to delete?");
+                if (deleteMsg) {
+                    $.ajax({
+                        type: "POST",
+                        url: SITEURL + '/fullcalenderAjax',
+                        data: {
+                            id: event.id,
+                            type: 'delete'
+                        },
+                        success: function () {
+                            calendar.fullCalendar('removeEvents', event.id);
+                            displayMessage("Event Deleted Successfully");
+                            loadEventsInSidebar();  // Refresh sidebar
+                        },
+                        error: function (xhr) {
+                            console.error("Error:", xhr.responseText);
+                        }
+                    });
+                }
             }
         }
     });

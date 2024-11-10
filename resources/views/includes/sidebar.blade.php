@@ -51,8 +51,8 @@
         <span class="menu-title">Parents</span>
     </a>
    </li>
-   <li class="nav-item  {{ request()->routeIs('calendar') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('calendar') }} ">
+   <li class="nav-item  {{ request()->routeIs('calendar.index') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('calendar.index') }} ">
         <i class="mdi mdi-account-multiple-outline menu-icon"></i>
         <span class="menu-title">Calendar</span>
     </a>

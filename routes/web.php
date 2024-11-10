@@ -50,13 +50,13 @@ Route::get('/search-parent', [App\Http\Controllers\ParentController::class, 'sea
 
 //CALENDAR
 
-// Route::get('fullcalender', [EventCalendarController::class, 'index'])->name('calendar.index');
-// Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
-Route::get('/calendar', [EventCalendarController::class, 'calendar'])->name('calendar');
-Route::get('/events', 'EventCalendarController@index'); // Fetch all events
-Route::post('/events', [EventCalendarController::class, 'store']);
-Route::put('/events/{id}', 'EventCalendarController@update'); // Update an event
-Route::delete('/events/{id}', 'EventCalendarController@destroy'); // Delete an event
+Route::get('fullcalender', [EventCalendarController::class, 'index']);
+Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
+// Route::get('/calendar', [EventCalendarController::class, 'index'])->name('calendar');
+// Route::get('/events', 'EventCalendarController@index'); // Fetch all events
+// Route::post('/events', [EventCalendarController::class, 'store']);
+// Route::put('/events/{id}', 'EventCalendarController@update'); // Update an event
+// Route::delete('/events/{id}', 'EventCalendarController@destroy'); // Delete an event
 
 
 
