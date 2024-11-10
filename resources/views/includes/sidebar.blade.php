@@ -45,10 +45,16 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->routeIs('parent.index') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('parent.index') }} ">
         <i class="mdi mdi-account-multiple-outline menu-icon"></i>
         <span class="menu-title">Parents</span>
+    </a>
+   </li>
+   <li class="nav-item  {{ request()->routeIs('calendar.index') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('calendar.index') }} ">
+        <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+        <span class="menu-title">Calendar</span>
     </a>
    </li>
     <li class="nav-item">

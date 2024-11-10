@@ -19,7 +19,8 @@ class patients extends Model
     }
     public function getAgeAttribute()
     {
-        return Carbon::parse($this->birthday)->age;
+        return Carbon::parse($this->birthday)->diffInMonths(Carbon::now());
     }
+    
     
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\EventCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('/edit-patient/{id}', [App\Http\Controllers\PatientController::class,
 Route::put('/patient/{id}/edit', [App\Http\Controllers\PatientController::class, 'update'])->name('patient.update');
 Route::delete('/patient/{id}/delete', [App\Http\Controllers\PatientController::class, 'destroy'])->name('patient.delete');
 Route::get('/search-patient', [App\Http\Controllers\PatientController::class, 'searchPatient'])->name('patient.search');
+Route::get('/table-2', [App\Http\Controllers\PatientController::class, 'tableTwo'])->name('table.two');
 
 
 
@@ -44,4 +46,18 @@ Route::get('/parents-data', [App\Http\Controllers\ParentController::class, 'pare
 Route::put('/update-parent/{id}/update', [App\Http\Controllers\ParentController::class, 'updateParent'])->name('parent.update');
 Route::delete('/parent/{id}/delete', [App\Http\Controllers\ParentController::class, 'destroy'])->name('parent.delete');
 Route::get('/search-parent', [App\Http\Controllers\ParentController::class, 'searchParent'])->name('parent.search');
+
+
+//CALENDAR
+
+Route::get('fullcalender', [EventCalendarController::class, 'index']);
+Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
+// Route::get('/calendar', [EventCalendarController::class, 'index'])->name('calendar');
+// Route::get('/events', 'EventCalendarController@index'); // Fetch all events
+// Route::post('/events', [EventCalendarController::class, 'store']);
+// Route::put('/events/{id}', 'EventCalendarController@update'); // Update an event
+// Route::delete('/events/{id}', 'EventCalendarController@destroy'); // Delete an event
+
+
+
 });
