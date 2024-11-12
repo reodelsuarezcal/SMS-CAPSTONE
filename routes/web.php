@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\EventCalendarController;
+use App\Http\Controllers\TermsPrivacyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Route::get('/search-parent', [App\Http\Controllers\ParentController::class, 'sea
 
 //CALENDAR
 
-Route::get('fullcalender', [EventCalendarController::class, 'index']);
+Route::get('fullcalender', [EventCalendarController::class, 'index'])->name('calendar.index');
 Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
 // Route::get('/calendar', [EventCalendarController::class, 'index'])->name('calendar');
 // Route::get('/events', 'EventCalendarController@index'); // Fetch all events
@@ -59,5 +60,6 @@ Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
 // Route::delete('/events/{id}', 'EventCalendarController@destroy'); // Delete an event
 
 
-
+//TERMSPRIVACY
+Route::get('/termsprivacy', [App\Http\Controllers\TermsPrivacyController::class, 'index'])->name('termsprivacy.index');
 });

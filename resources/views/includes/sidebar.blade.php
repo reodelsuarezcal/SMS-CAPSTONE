@@ -108,7 +108,7 @@
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="../../../docs/documentation.html">
+    <a class="nav-link" href="{{ route('termsprivacy.index') }} ">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Terms & Condition</span>
       </a>
