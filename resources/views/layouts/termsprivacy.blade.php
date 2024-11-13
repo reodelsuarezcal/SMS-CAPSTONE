@@ -1,10 +1,4 @@
 @include ('includes.base')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms & Privacy Policy - San Manuel Children's Malnutrition Monitoring System</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -29,6 +23,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0rem;
+            margin-bottom: -5rem;
         }
 
         .tabs {
@@ -79,6 +74,7 @@
 
         h2 {
             color: var(--primary-color);
+            margin-top: 0rem;
             margin-bottom: 1.5rem;
         }
 
@@ -205,11 +201,25 @@
 
                 <h3>Data Retention</h3>
                 <p>We retain personal and health data for as long as necessary to fulfill the purposes of the system. Once the data is no longer needed, or if the child reaches the age of majority, it will be deleted in accordance with applicable laws.</p>
-
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+                                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© 2024 Brgy. San Manuel Malnutrition Monitoring System. All rights reserved.</span>
+                                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                                            <a href="{{ route('termsprivacy.index') }}" class="footer-link">Terms of Service</a>  |  
+                                            <a href="{{ route('termsprivacy.index') }}" class="footer-link">Privacy Policy</a>
+                                        </span>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.content').forEach(content => {

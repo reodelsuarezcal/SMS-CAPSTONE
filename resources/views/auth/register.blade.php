@@ -83,65 +83,113 @@
                     </svg>
                 </button>
                 <h2 class="modal-title">Terms of Service</h2>
-                <p class="last-updated">Last updated: 12th November 2024</p>
-            </div>
+    <p class="last-updated">Last updated: 12th November 2024</p>
+</div>
 
-            <div class="modal-body">
-                <div class="section">
-                    <h2 class="section-title">Summary</h2>
-                    <p class="section-content">
-                    The Terms of Service (TOS) is a legal agreement that outlines the rules and guidelines for using a service or website. By using the service, users agree to abide by these terms. Below is a general overview of what a typical TOS covers:
-                    </p>
-                </div>
-                <div class="section">
-                    <h2 class="section-title">Terms</h2>
-                    <p class="section-content">
-                    By accessing or using the service, users agree to comply with the TOS. If users do not agree with the terms, they must refrain from using the service.
-                    </p>
-                    <h2 class="section-title">Responsibilities</h2>
-                    <p class="section-content">
-                    Account Creation: Users must provide accurate, current, and complete information when creating an account. They are also responsible for maintaining the security of their account credentials.
-                    </p>
-                    <p class="section-content">
-                    Appropriate Use: Users must use the service only for legal and ethical purposes, and not engage in activities like spamming, hacking, or distributing malware.
-                    </p>
-                    <p class="section-content">
-                    Content Responsibility: Users are responsible for the content they upload or edit through the service, and they must respect intellectual property rights.
-                    </p>
-                    <h2 class="section-title">Limitations of Liability</h2>
-                    <p class="section-content">
-                    We are not responsible for any loss of data, disruptions to service, or any damage arising from the use of our service, unless explicitly stated.
-                    </p>
-                    <p class="section-content">
-                    We do not guarantee the availability, accuracy, or reliability of the service at all times. While we strive to maintain a reliable service, there may be interruptions due to maintenance or unforeseen issues.
-                    </p>
-                    <p class="section-content">
-                    Under no circumstances will we be liable for indirect, incidental, special, or consequential damages (such as loss of profits, reputation, etc.) that may arise from using or being unable to use the service.
-                    </p>
-                    <h2 class="section-title">Intellectual Property</h2>
-                    <p class="section-content">
-                    The service provider retains ownership of all intellectual property associated with the service, including trademarks, copyrights, and patents. Users may not use these without explicit permission.
-                    </p>
-                    <p class="section-content">
-                    We do not guarantee the availability, accuracy, or reliability of the service at all times. While we strive to maintain a reliable service, there may be interruptions due to maintenance or unforeseen issues.
-                    </p>
-                    <p class="section-content">
-                    Under no circumstances will we be liable for indirect, incidental, special, or consequential damages (such as loss of profits, reputation, etc.) that may arise from using or being unable to use the service.
-                    </p>
-                    <h2 class="section-title">Privacy and Data Collection</h2>
-                    <p class="section-content">
-                    Personal Data: The service may collect personal data, such as account information, and usage data, as described in the privacy policy.
-                    </p>
-                    <p class="section-content">
-                    Data Use: The data collected is used to provide and improve the service, and to personalize user experiences. It may also be used for marketing purposes if the user has consented.
-                    </p>
-                    <p class="section-content">
-                    Data Sharing: Personal data may be shared with third-party vendors, partners, or for legal reasons (e.g., if required by law).
-                    </p>
-                </div>
-            </div>
+<div class="modal-body">
+    <div class="section">
+        <h2 class="section-title">Summary</h2>
+        <p class="section-content">
+            The Terms of Service (TOS) is a legal agreement that outlines the rules and guidelines for using the service or website. By accessing or using the service, users agree to abide by these terms. Below is a general overview of what a typical TOS covers:
+        </p>
+    </div>
 
+    <div class="section">
+        <h2 class="section-title">Terms</h2>
+        <p class="section-content">
+            By accessing or using the service, users agree to comply with the TOS. If users do not agree with the terms, they must refrain from using the service. 
+            These terms are binding upon any and all users who create accounts, register, or use the service in any capacity.
+        </p>
+    </div>
 
+    <div class="section">
+        <h2 class="section-title">Responsibilities</h2>
+        <p class="section-content">
+            <strong>Account Creation:</strong> Users must provide accurate, current, and complete information when creating an account. They are responsible for keeping their account credentials secure and private.
+        </p>
+        <p class="section-content">
+            <strong>Appropriate Use:</strong> Users must use the service only for legal, ethical, and intended purposes. Any unlawful activities, including spamming, hacking, or distributing malware, are strictly prohibited.
+        </p>
+        <p class="section-content">
+            <strong>Content Responsibility:</strong> Users are responsible for the content they upload or manage on the platform. This includes ensuring they respect intellectual property rights, not uploading illegal content, and not violating third-party rights.
+        </p>
+        <p class="section-content">
+            <strong>Admin Role:</strong> If you are an admin user, you are responsible for managing user accounts, ensuring proper registration and compliance with platform rules. Admins must verify user information and ensure the security and accuracy of the registration process.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Limitations of Liability</h2>
+        <p class="section-content">
+            We are not responsible for any loss of data, disruptions to service, or any damage arising from the use of our service, unless explicitly stated in these Terms of Service.
+        </p>
+        <p class="section-content">
+            We do not guarantee the availability, accuracy, or reliability of the service at all times. While we strive to maintain a reliable service, interruptions may occur due to maintenance or unforeseen technical issues.
+        </p>
+        <p class="section-content">
+            Under no circumstances will we be liable for indirect, incidental, special, or consequential damages, including loss of profits, reputation, or data, that may arise from using or being unable to use the service.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Intellectual Property</h2>
+        <p class="section-content">
+            The service provider retains ownership of all intellectual property associated with the service, including trademarks, copyrights, patents, and proprietary technologies. Users may not use or replicate these intellectual properties without explicit permission.
+        </p>
+        <p class="section-content">
+            The content, features, and services available through the platform, including designs and code, are protected by copyright and intellectual property laws.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Privacy and Data Collection</h2>
+        <p class="section-content">
+            <strong>Personal Data:</strong> The service collects personal data such as account information and usage data as described in the Privacy Policy. Admin users are also responsible for ensuring that users are aware of how their data is being collected and used.
+        </p>
+        <p class="section-content">
+            <strong>Data Use:</strong> The collected data is used to provide and improve the service and personalize the user experience. It may also be used for marketing purposes, provided that the user has consented to such use.
+        </p>
+        <p class="section-content">
+            <strong>Data Sharing:</strong> Personal data may be shared with third-party vendors, partners, or in compliance with legal obligations (e.g., if required by law or to protect against fraud).
+        </p>
+        <p class="section-content">
+            As an admin, you must respect user privacy and adhere to data protection laws when managing user data. You must not misuse or share sensitive user data without explicit consent.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">User Termination and Suspension</h2>
+        <p class="section-content">
+            <strong>Admin Rights:</strong> Admins have the right to suspend or terminate user accounts if there are violations of these Terms of Service, illegal activities, or failure to comply with platform rules.
+        </p>
+        <p class="section-content">
+            <strong>User Termination:</strong> Users may request account deletion at any time. Admins are required to process these requests promptly while ensuring all legal obligations regarding data retention are met.
+        </p>
+        <p class="section-content">
+            <strong>Suspension or Banning:</strong> Users who engage in harmful activities, violate intellectual property rights, or misuse the platform may be suspended or banned by an admin. Admins must follow platform guidelines when implementing these actions.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Account Security</h2>
+        <p class="section-content">
+            <strong>Admin Responsibilities:</strong> Admin users are responsible for maintaining the security of their admin accounts, including safeguarding login credentials and ensuring that unauthorized access does not occur.
+        </p>
+        <p class="section-content">
+            <strong>Two-Factor Authentication:</strong> We recommend using two-factor authentication (2FA) for added security, especially for admins managing user accounts.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Modifications to the Terms of Service</h2>
+        <p class="section-content">
+            We reserve the right to modify, update, or change these Terms of Service at any time. Any changes will be communicated to the admin, and the revised terms will be posted here.
+        </p>
+        <p class="section-content">
+            It is the admin’s responsibility to regularly review these terms. Continuing to use the service after changes have been made constitutes acceptance of those changes.
+        </p>
+    </div>
+</div>
             <div class="modal-footer">
                 <button class="btn-modal btn-decline" id="declineTerms">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">

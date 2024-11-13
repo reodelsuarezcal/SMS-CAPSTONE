@@ -5,6 +5,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\TermsPrivacyController;
+use App\Http\Controllers\AboutController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +64,7 @@ Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
 
 //TERMSPRIVACY
 Route::get('/termsprivacy', [App\Http\Controllers\TermsPrivacyController::class, 'index'])->name('termsprivacy.index');
+
+//ABOUT
+Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name('about.index');
 });
