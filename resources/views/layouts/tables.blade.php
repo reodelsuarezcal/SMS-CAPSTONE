@@ -131,8 +131,9 @@
                               <th>Gender</th>
                               <th style="display:none;">Height (m)</th>
                               <th style="display:none;">Weight (kg)</th>
-                              <th>Age</th>
-                              <th>Parent/Guardian</th>
+                              <th>Age in Month</th>
+                              <th>Weight for Age</th>
+                              <th>Height for Age</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -146,7 +147,8 @@
                               <td style="display:none;">{{ $patient->height }}</td>
                               <td style="display:none;">{{ $patient->weight }}</td>
                               <td class="{{ $patient->age > 5 ? 'text-danger fw-bold' : '' }}">{{ $patient->age }}</td>
-                              <td>{{ $patient->parents ? $patient->parents->lastname . ', ' . $patient->parents->firstname . ' ' . $patient->parents->middlename : ' ' }}</td>
+                              <td>{{ $patient->wfa }}</td>
+                              <td>{{ $patient->hfa }}</td>
                           </tr>
                           @endforeach
                       </tbody>
@@ -160,7 +162,8 @@
                             <th>Birthday</th>
                             <th>Gender</th>
                             <th>Age in Month</th>
-                            <th>Parent/Guardian</th>
+                            <th>Weight for Age</th>
+                            <th>Height for Age</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -173,7 +176,8 @@
                             <td >{{ \Carbon\Carbon::parse($patient->birthday)->format('F j, Y') }}</td>
                             <td>{{$patient->gender}}</td>
                             <td class="{{ $patient->age > 5 ? 'text-danger fw-bold' : '' }}">{{$patient->age}}</td>
-                            <td>{{ $patient->parents ? $patient->parents->lastname . ', ' . $patient->parents->firstname . ' ' . $patient->parents->middlename : ' ' }}</td>
+                            <td>{{ $patient->wfa }}</td>
+                            <td>{{ $patient->hfa }}</td>
                             <td>
                             <a href="{{ route('view.profile', ['id'=> $patient->id]) }}" class="btn btn-success btn-sm text-white"><i class="mdi mdi-eye text-white"></i></a>
                              @if($patient->age > 5)
