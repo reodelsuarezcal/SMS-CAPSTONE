@@ -97,7 +97,7 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Add Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a><a href="{{route('view.profile', ['id' => $patient->id ])}}" class="btn btn-warning btn-sm text-dark" style="float:right; margin-right:2px;">View Profile</a></h4>
+                    <h4 class="card-title">Edit Patient  <a href="" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info btn-sm text-white" style="float:right">Add Parent</a><a href="{{route('view.profile', ['id' => $patient->id ])}}" class="btn btn-warning btn-sm text-dark" style="float:right; margin-right:2px;">View Profile</a></h4>
                     <form class="form-sample" method="POST" action="{{ route('patient.update', ['id' => $patient->id]) }}" enctype="multipart/form-data">
                       @csrf
                       @method('PUT')
@@ -149,13 +149,12 @@
                       <div class="row">
                       <div class="col-md-4">
                         <div class="form-group row">
-                            <div class="col-sm-12">
-                                <select class="form-select text-dark"  name="gender" aria-label="Select Gender">
-                                    <option selected>{{$patient->gender}}</option>
-                                    <option class="text-dark" value="male">Male</option>
-                                    <option class="text-dark" value="female">Female</option>
-                                </select>
-                            </div>
+                        <div class="col-sm-12">
+                          <select class="form-select text-dark" name="gender" aria-label="Select Gender">
+                              <option value="male" class="text-dark" {{ $patient->gender == 'male' ? 'selected' : '' }}>Male</option>
+                              <option value="female" class="text-dark" {{ $patient->gender == 'female' ? 'selected' : '' }}>Female</option>
+                          </select>
+                      </div>
                         </div>
                     </div> 
                     <div class="col-md-4">

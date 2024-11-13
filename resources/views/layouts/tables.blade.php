@@ -134,6 +134,7 @@
                               <th>Age in Month</th>
                               <th>Weight for Age</th>
                               <th>Height for Age</th>
+                              <th>Weight for Length/H</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -149,6 +150,8 @@
                               <td class="{{ $patient->age > 5 ? 'text-danger fw-bold' : '' }}">{{ $patient->age }}</td>
                               <td>{{ $patient->wfa }}</td>
                               <td>{{ $patient->hfa }}</td>
+                              <td>{{ $patient->wfl_h }}</td>
+                              
                           </tr>
                           @endforeach
                       </tbody>
@@ -164,6 +167,7 @@
                             <th>Age in Month</th>
                             <th>Weight for Age</th>
                             <th>Height for Age</th>
+                            <th>Weight for Length/H</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -178,6 +182,7 @@
                             <td class="{{ $patient->age > 5 ? 'text-danger fw-bold' : '' }}">{{$patient->age}}</td>
                             <td>{{ $patient->wfa }}</td>
                             <td>{{ $patient->hfa }}</td>
+                            <td>{{ $patient->wfl_h }}</td>
                             <td>
                             <a href="{{ route('view.profile', ['id'=> $patient->id]) }}" class="btn btn-success btn-sm text-white"><i class="mdi mdi-eye text-white"></i></a>
                              @if($patient->age > 5)
