@@ -151,8 +151,8 @@
                             <div class="col-sm-12">
                                 <select class="form-select text-dark" name="gender" aria-label="Select Gender">
                                     <option disabled selected>Select Gender</option>
-                                    <option class="text-dark" value="Male">Male</option>
-                                    <option class="text-dark" value="Female">Female</option>
+                                    <option class="text-dark" value="male">Male</option>
+                                    <option class="text-dark" value="female">Female</option>
                                 </select>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" name="weight" placeholder="Weight(kg)"/>
+                                <input type="number" step="0.1" min="0" class="form-control" name="weight" placeholder="Weight(kg)"/>
                             </div>
                         </div>
                     </div>

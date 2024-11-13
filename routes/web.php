@@ -50,7 +50,7 @@ Route::get('/search-parent', [App\Http\Controllers\ParentController::class, 'sea
 
 //CALENDAR
 
-Route::get('fullcalender', [EventCalendarController::class, 'index']);
+Route::get('fullcalender', [EventCalendarController::class, 'index'])->name('calendar.index');
 Route::post('fullcalenderAjax', [EventCalendarController::class, 'ajax']);
 // Route::get('/calendar', [EventCalendarController::class, 'index'])->name('calendar');
 // Route::get('/events', 'EventCalendarController@index'); // Fetch all events
