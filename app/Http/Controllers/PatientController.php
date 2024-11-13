@@ -61,6 +61,34 @@ class PatientController extends Controller
     
         return 'Data not available';
     }
+
+    private function getWeightHeightCategory($gender, $height, $weight)
+    {
+        $gender = strtolower($gender); 
+        $growthStandardsWfl = config("growthWfl.$gender");
+        if (is_null($growthStandardsWfl)) {
+            return 'Invalid gender or growth data not available';
+        }
+        foreach ($growthStandardsWfl as $standard) {
+            if ($standard['length'] == $height) {
+                if ($weight >= $standard['sam'][0] && $weight <= $standard['sam'][1]) {
+                    return 'SAM';
+                } elseif ($weight >= $standard['mam'][0] && $weight <= $standard['mam'][1]) {
+                    return 'MAM';
+                } elseif ($weight >= $standard['normal'][0] && $weight <= $standard['normal'][1]) {
+                    return 'Normal';
+                }elseif ($weight >= $standard['overweight'][0] && $weight <= $standard['overweight'][1]) {
+                    return 'Overweight';
+                }
+                elseif ($weight >= $standard['obese'][0]) {
+                    return 'Obese';
+                }
+            }
+        }
+    
+        return 'Data not available';
+    }
+    
     
     
 
@@ -134,6 +162,7 @@ class PatientController extends Controller
             $age = Carbon::parse($birthday)->diffInMonths(Carbon::now());
             $wfa = $this->getWeightCategory($request->input('gender'), $age, $request->input('weight'));
             $hfa = $this->getHeightCategory($request->input('gender'), $age, $request->input('height'));
+            $wfl_h = $this->getWeightHeightCategory($request->input('gender'), $$request->input('height'), $request->input('weight'));
     
             // Handle file upload for profile picture
             if ($request->hasFile('profile_pic')) {
@@ -173,6 +202,7 @@ class PatientController extends Controller
                 'weight' => $weight,
                 'wfa' => $wfa,
                 'hfa' => $hfa,
+                'wfl_h' => $wfl_h,
                 'parent_id' => $parent_id,
                 'profile_pic' => $profile_pic, 
             ];
@@ -215,6 +245,8 @@ class PatientController extends Controller
         $age = Carbon::parse($patient->birthday)->diffInMonths(Carbon::now());
         $patient->wfa = $this->getWeightCategory($request->input('gender'), $age, $request->input('weight'));
         $patient->hfa = $this->getHeightCategory($request->input('gender'), $age, $request->input('height'));
+        $patient->wfl_h = $this->getWeightHeightCategory($request->input('gender'), $request->input('height'), $request->input('weight'));
+    
 
         if ($request->hasFile('profile_pic')) {
             $picture = $request->file('profile_pic');
