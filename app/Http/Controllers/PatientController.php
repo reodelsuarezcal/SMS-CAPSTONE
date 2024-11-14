@@ -117,9 +117,9 @@ class PatientController extends Controller
 
     // Pagination logic
     if ($perPage == 'all') {
-        $patientsData = $query->get();
+        $patientsData = $query->orderBy('created_at','desc')->get();
     } else {
-        $patientsData = $query->paginate($perPage);
+        $patientsData = $query->orderBy('created_at','desc')->paginate($perPage);
     }
 
     return view('layouts.tables', compact('patientsData', 'perPage', 'ageGroup'));
@@ -162,7 +162,7 @@ class PatientController extends Controller
             $age = Carbon::parse($birthday)->diffInMonths(Carbon::now());
             $wfa = $this->getWeightCategory($request->input('gender'), $age, $request->input('weight'));
             $hfa = $this->getHeightCategory($request->input('gender'), $age, $request->input('height'));
-            $wfl_h = $this->getWeightHeightCategory($request->input('gender'), $$request->input('height'), $request->input('weight'));
+            $wfl_h = $this->getWeightHeightCategory($request->input('gender'), $request->input('height'), $request->input('weight'));
     
             // Handle file upload for profile picture
             if ($request->hasFile('profile_pic')) {

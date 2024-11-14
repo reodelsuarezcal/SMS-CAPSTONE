@@ -93,7 +93,918 @@
               </div>
             </div>
             <div class="row">
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
               <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <p class="card-title">Weight for age (Normal)</p>
+                      <a href="#" class="text-info">View all</a>
+                    </div>
+                    <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                    <div id="sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                    <canvas id="sales-chart"></canvas>
+                    <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                  </div>
+                </div>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    const boysCount = {{ $boysCount }};
+                    const girlsCount = {{ $girlsCount }};
+                    const boysCount2 = {{ $boysCount2 }};
+                    const girlsCount2 = {{ $girlsCount2 }};
+                    const boysCount3 = {{ $boysCount3 }};
+                    const girlsCount3 = {{ $girlsCount3 }};
+                    const boysCount4 = {{ $boysCount4 }};
+                    const girlsCount4 = {{ $girlsCount4 }};
+                    const boysCount5 = {{ $boysCount5 }};
+                    const girlsCount5 = {{ $girlsCount5 }};
+                    const boysCount6 = {{ $boysCount6 }};
+                    const girlsCount6 = {{ $girlsCount6 }};
+
+
+                    if ($("#sales-chart").length) {
+                      const ctx = document.getElementById('sales-chart');
+                      new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: ["0-5","6-11", "12-23", "24-35", "36-47", "48-59"],
+                          datasets: [
+                            {
+                              label: 'Boys',
+                              data: [boysCount, boysCount2, boysCount3, boysCount4, boysCount5, , boysCount6],
+                              backgroundColor: '#4B49AC',
+                              borderRadius: 5,
+                            },
+                            {
+                              label: 'Girls',
+                              data: [girlsCount, girlsCount2, girlsCount3,  girlsCount4, girlsCount5, girlsCount6],
+                              backgroundColor: '#FF6384',
+                              borderRadius: 5,
+                            }
+                          ]
+                        },
+                        options: {
+                          responsive: true,
+                          maintainAspectRatio: true,
+                          scales: {
+                            x: {
+                              grid: { display: false },
+                              ticks: { color: "#6C7383" },
+                            },
+                            y: {
+                              grid: { display: true },
+                              ticks: {
+                                color: "#6C7383",
+                                min: 0,
+                                callback: function(value) { return value; }
+                              }
+                            }
+                          },
+                          plugins: {
+                            legend: {
+                              display: true,
+                              labels: { color: '#6C7383' }
+                            }
+                          }
+                        }
+                      });
+                    }
+                  });
+                </script>
+              </div>         
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Age (Overweight)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="new-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="new-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRange = @json($countsByAgeRange);
+
+                    if (document.getElementById("new-sales-chart")) {
+                        const ctx = document.getElementById('new-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRange.map(range => range.boys),
+                                        backgroundColor: '#4B49AC',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRange.map(range => range.girls),
+                                        backgroundColor: '#FF6384',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+             <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Age (Underweight)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="under-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="under-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeUnder = @json($countsByAgeRangeUnder);
+
+                    if (document.getElementById("under-sales-chart")) {
+                        const ctx = document.getElementById('under-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeUnder.map(range => range.boys),
+                                        backgroundColor: '#4B49AC',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeUnder.map(range => range.girls),
+                                        backgroundColor: '#FF6384',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+
+              <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Age (Severely Underweight)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="severe-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="severe-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeSeu = @json($countsByAgeRangeSeU);
+
+                    if (document.getElementById("severe-sales-chart")) {
+                        const ctx = document.getElementById('severe-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeSeu.map(range => range.boys),
+                                        backgroundColor: '#4B49AC',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeSeu.map(range => range.girls),
+                                        backgroundColor: '#FF6384',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+             <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Length/Height for Age (Normal)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="lfanormal-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="lfanormal-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeLfaN= @json($countsByAgeRangeLfaN);
+
+                    if (document.getElementById("lfanormal-sales-chart")) {
+                        const ctx = document.getElementById('lfanormal-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeLfaN.map(range => range.boys),
+                                        backgroundColor: '#228C22',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeLfaN.map(range => range.girls),
+                                        backgroundColor: '#FF964F',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+
+              <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Length/Height for Age (Stunted)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="lfastunted-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="lfastunted-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeLfaS = @json($countsByAgeRangeLfaS);
+
+                    if (document.getElementById("lfastunted-sales-chart")) {
+                        const ctx = document.getElementById('lfastunted-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeLfaS.map(range => range.boys),
+                                        backgroundColor: '#228C22',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeLfaS.map(range => range.girls),
+                                        backgroundColor: '#FF964F',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+             <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Length/Height for Age (Severely Stunted)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="lfasevere-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="lfasevere-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeLfaSt = @json($countsByAgeRangeLfaSt);
+
+                    if (document.getElementById("lfasevere-sales-chart")) {
+                        const ctx = document.getElementById('lfasevere-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeLfaSt.map(range => range.boys),
+                                        backgroundColor: '#228C22',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeLfaSt.map(range => range.girls),
+                                        backgroundColor: '#FF964F',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Length/Height for Age (Tall)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="lfatall-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="lfatall-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeLfaT = @json($countsByAgeRangeLfaT);
+
+                    if (document.getElementById("lfatall-sales-chart")) {
+                        const ctx = document.getElementById('lfatall-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeLfaT.map(range => range.boys),
+                                        backgroundColor: '#228C22',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeLfaT.map(range => range.girls),
+                                        backgroundColor: '#FF964F',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+             <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Length/Height (Normal)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="wflN-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="wflN-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeWflN = @json($countsByAgeRangeWflN);
+
+                    if (document.getElementById("wflN-sales-chart")) {
+                        const ctx = document.getElementById('wflN-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeWflN.map(range => range.boys),
+                                        backgroundColor: '#F52F57',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeWflN.map(range => range.girls),
+                                        backgroundColor: '#FFEE8C',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Length/Height (SAM)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="wflS-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="wflS-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeWflS = @json($countsByAgeRangeWflS);
+
+                    if (document.getElementById("wflS-sales-chart")) {
+                        const ctx = document.getElementById('wflS-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeWflS.map(range => range.boys),
+                                        backgroundColor: '#F52F57',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeWflS.map(range => range.girls),
+                                        backgroundColor: '#FFEE8C',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+              <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Length/Height (MAM)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="wflM-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="wflM-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeWflM = @json($countsByAgeRangeWflM);
+
+                    if (document.getElementById("wflM-sales-chart")) {
+                        const ctx = document.getElementById('wflM-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeWflM.map(range => range.boys),
+                                        backgroundColor: '#F52F57',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeWflM.map(range => range.girls),
+                                        backgroundColor: '#FFEE8C',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Length/Height (Obese)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="wflOb-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="wflOb-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeWflOb = @json($countsByAgeRangeWflOb);
+
+                    if (document.getElementById("wflOb-sales-chart")) {
+                        const ctx = document.getElementById('wflOb-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeWflOb.map(range => range.boys),
+                                        backgroundColor: '#F52F57',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeWflOb.map(range => range.girls),
+                                        backgroundColor: '#FFEE8C',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title">Weight for Length/Height (Overweight)</p>
+                            <a href="#" class="text-info">View all</a>
+                        </div>
+                        <p class="font-weight-500">
+                            The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc
+                        </p>
+                        <div id="wflOv-sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
+                        <canvas id="wflOv-sales-chart"></canvas>
+                        <span><p class="text-center" style="font-size: 0.8em;">Age in Months</p></span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const countsByAgeRangeWflOv = @json($countsByAgeRangeWflOv);
+
+                    if (document.getElementById("wflOv-sales-chart")) {
+                        const ctx = document.getElementById('wflOv-sales-chart');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["0-5", "6-11", "12-23", "24-35", "36-47","48-59"],
+                                datasets: [
+                                    {
+                                        label: 'Boys',
+                                        data: countsByAgeRangeWflOv.map(range => range.boys),
+                                        backgroundColor: '#F52F57',
+                                        borderRadius: 5,
+                                    },
+                                    {
+                                        label: 'Girls',
+                                        data: countsByAgeRangeWflOv.map(range => range.girls),
+                                        backgroundColor: '#FFEE8C',
+                                        borderRadius: 5,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: "#6C7383" },
+                                    },
+                                    y: {
+                                        grid: { display: true },
+                                        ticks: {
+                                            color: "#6C7383",
+                                            min: 0,
+                                            callback: function(value) { return value; }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        labels: { color: '#6C7383' }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
+            <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <p class="card-title">Malnourished Gender Report </p>
@@ -117,19 +1028,6 @@
                       </div>
                     </div>
                     <canvas id="order-chart"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <p class="card-title">Months Report</p>
-                      <a href="#" class="text-info">View all</a>
-                    </div>
-                    <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                    <div id="sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
-                    <canvas id="sales-chart"></canvas>
                   </div>
                 </div>
               </div>

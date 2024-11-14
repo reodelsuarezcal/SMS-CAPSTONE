@@ -174,7 +174,7 @@
                     <div class="col-md-4">
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" name="height" placeholder="Height(cm)"/>
+                                <input type="number" step="0.1" min="0" class="form-control" name="height" placeholder="Height(cm)"/>
                             </div>
                         </div>
                     </div>
