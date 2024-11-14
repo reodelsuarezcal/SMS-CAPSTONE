@@ -11,7 +11,7 @@ return [
         ],
         [
             'age' => 1,
-            'severely_underweight' => [0, 48.8],
+            'severely_stunted' => [0, 48.8],
             'stunted' => [48.9, 50.7],
             'normal' => [50.8, 58.6],
             'tall' => [58.7, PHP_INT_MAX],

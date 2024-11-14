@@ -151,8 +151,8 @@
                         <div class="form-group row">
                         <div class="col-sm-12">
                           <select class="form-select text-dark" name="gender" aria-label="Select Gender">
-                              <option value="male" class="text-dark" {{ $patient->gender == 'male' ? 'selected' : '' }}>Male</option>
-                              <option value="female" class="text-dark" {{ $patient->gender == 'female' ? 'selected' : '' }}>Female</option>
+                          <option value="male" class="text-dark" {{ $patient->gender == 'male' ? ' selected' : '' }}>Male</option>
+                          <option value="female" class="text-dark" {{ $patient->gender == 'female' ? ' selected' : '' }}>Female</option>
                           </select>
                       </div>
                         </div>
