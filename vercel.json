@@ -7,7 +7,7 @@
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/public/login" }
+      { "src": "/(.*)", "dest": "/public/index.php" }
     ]
   }
   
